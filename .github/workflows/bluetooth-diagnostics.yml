@@ -1,0 +1,27 @@
+name: Bluetooth reference diagnostics
+on:
+  push:
+    branches: [bluetooth-validation]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Retrieve public reference sources
+        run: |
+          set -eux
+          git clone --depth 1 https://github.com/amalahama/smk37-firmware-custom-mod.git v022
+          git clone https://github.com/ruppert/fmini-1.git fmini
+          git -C fmini checkout c39e186699a6478502267210579bda81480e3823
+          git clone --depth 1 https://gitee.com/Jieli-Tech/fw-AC79_AIoT_SDK.git sdk
+      - name: Inventory and verify reference binaries
+        run: |
+          set -eu
+          for repo in v022 fmini sdk; do git -C "$repo" rev-parse HEAD; done
+          find v022 -iname '*.fwsc' -type f -exec sha256sum {} +
+          find sdk -type f \( -iname '*ble*' -o -iname '*btcontroller*' -o -iname '*.a' \) | sort
+          find fmini -name '*toolchain*'
+          find v022 -iname '*022.fwsc' -type f -exec sh -c 'echo "fe51c1c6eba90dc9aabe40900457aa1c1ddb3d9c32391335b1aceaded1d2035f  $1" | sha256sum -c -' sh {} \;
