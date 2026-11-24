@@ -1,0 +1,3 @@
+# Neon Wave — proposta visual solicitada
+
+Preservar o visualizador animado original do FMini-1, identificando primeiro sua implementação e natureza real. Aplicar traço violeta neon contínuo, núcleo luminoso e rastro temporal suave com desaparecimento progressivo, inspirado no logotipo aprovado. Priorizar sincronização com notas, sequenciador e arpejador quando suportado pela fonte original. Não inventar sinal de áudio nem substituir funções existentes. Limitar custo gráfico e validar latência, carga de CPU e desempenho na tela física. No Neon Studio, distinguir simulação de visualização real. Não modificar o padrão de knobs aprovado. Implementação e validação pendentes.
