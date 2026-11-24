@@ -1,0 +1,3 @@
+# Decisão aprovada — editor de pads
+
+GLOBAL + PAD 1 é o atalho prioritário aprovado pelo usuário, substituindo a proposta PAD 1 + PAD 9 de NAVEGACAO-PADS.md. Manter GLOBAL pressionado e acionar PAD 1. GLOBAL sozinho mantém configurações gerais; PATCH retorna à tela principal. PARA e FX são contextuais ao editor. Selecionar P01–P16, atribuir sons, editar parâmetros e efeitos, salvar explicitamente. Preservar timbre principal, funções originais, roteamento MIDI e resposta imediata dos pads. Validar reconhecimento da combinação sem disparo de nota ou CC acidental, sem atraso perceptível e sem conflito com atalhos existentes. Se inviável, consultar usuário antes de mudar atalho. Estado: decisão de interface aprovada; implementação e testes pendentes.
