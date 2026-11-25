@@ -1,0 +1,3 @@
+# Apresentação visual do firmware no site
+
+Referência funcional: https://ruppert.github.io/fmini-1/ . Não copiar identidade estética; usar logotipo original e padrão Neon Violet aprovado. Apresentar telas reais da versão distribuída, incluindo PATCH, PARA, FX, GLOBAL, arpejador, sequenciador, pads, Bluetooth e modo MIDI conforme efetivamente implementados. Explicar em português acesso por botões, navegação, osciladores, filtros, envelopes, efeitos e exemplos musicais. Integrar manual ilustrado, Neon Studio e Neon Sound Library. Distinguir protótipos, simulações e capturas reais; verificar mapeamento e parâmetros no código antes de publicar. Preservar créditos e funcionalidades FMini-1. Layout responsivo. Implementação pendente, sem bloquear prioridade BLE.
