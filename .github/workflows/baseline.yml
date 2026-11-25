@@ -1,0 +1,38 @@
+name: SMK37 baseline diagnostic
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/baseline.yml'
+permissions:
+  contents: read
+jobs:
+  baseline:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - name: Fetch pinned upstream
+        run: |
+          git clone https://github.com/ruppert/fmini-1.git upstream
+          cd upstream
+          git checkout --detach c39e186699a6478502267210579bda81480e3823
+          git submodule update --init --recursive
+          git rev-parse HEAD
+      - name: Install host dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip xz-utils
+          python3 -m pip install Pillow fonttools
+      - name: Fetch JieLi toolchain
+        working-directory: upstream
+        run: sh tools/get_toolchain.sh
+      - name: Fetch SDK
+        run: git clone --depth 1 --branch AC79NN_SDK_V1.2.1_2023-12-13 https://gitee.com/Jieli-Tech/fw-AC79_AIoT_SDK.git "$HOME/fw-AC79_AIoT_SDK"
+      - name: Compile upstream SMK37 baseline (not for installation)
+        working-directory: upstream
+        run: |
+          export JIELI_TOOLCHAIN="$HOME/.jieli/toolchain"
+          export AC79_SDK="$HOME/fw-AC79_AIoT_SDK"
+          BOARD=smk37 ./build.sh
+          find build -maxdepth 1 -name '*.fwsc' -type f -size +0c -print -exec sha256sum {} \;
+          test -n "$(find build -maxdepth 1 -name '*.fwsc' -type f -size +0c -print -quit)"
