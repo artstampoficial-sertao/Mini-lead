@@ -1,0 +1,3 @@
+# Padrão definitivo dos knobs no site
+
+Usar docs/DESIGN-FINAL-APROVADO.md como referência obrigatória em Neon Studio, apresentação de telas e manual online. Não usar versões simplificadas. Corpo robusto preenchido com profundidade, números grandes centrais, nomes afastados abaixo, arco único contínuo violeta #D94CFF proporcional de 0 a 100%, ponteiro sincronizado, percurso de 270 graus, sem rastros duplicados. Reutilizar componente web comum; interação por mouse e toque no simulador, representação fiel nas demonstrações e manual. Preservar layout aprovado sem sliders adicionais na representação da tela. Validar responsividade e acessibilidade. Implementação web pendente.
