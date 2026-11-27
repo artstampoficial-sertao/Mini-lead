@@ -36,3 +36,21 @@ jobs:
           BOARD=smk37 ./build.sh
           find build -maxdepth 1 -name '*.fwsc' -type f -size +0c -print -exec sha256sum {} \;
           test -n "$(find build -maxdepth 1 -name '*.fwsc' -type f -size +0c -print -quit)"
+      - name: Record non-binary build evidence
+        if: always()
+        run: |
+          mkdir -p evidence
+          if test -d upstream/build; then
+            find upstream/build -maxdepth 1 -name '*.fwsc' -type f -size +0c -exec sha256sum {} \; > evidence/sha256.txt
+            find upstream/build -maxdepth 1 -name '*.fwsc' -type f -printf '%f %s bytes\n' > evidence/sizes.txt
+          fi
+          git -C upstream rev-parse HEAD > evidence/upstream.txt
+          git -C "$HOME/fw-AC79_AIoT_SDK" rev-parse HEAD > evidence/sdk.txt
+      - name: Upload diagnostic metadata only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: baseline-evidence
+          path: evidence/*.txt
+          if-no-files-found: error
+          retention-days: 14
